@@ -10,22 +10,22 @@
 		<h1 id="title">AdminStaffPage - Login</h1>
 		<h1 id="prompt">Please Login:</h1>
 		<div id="staff-wrapper">
-			<form id="staff-form">
+			<form id="staff-form" action="staff.html" onsubmit="return staffLogin()">
 				<h2>Staff Login</h2>
 				<p>Username:</p>
-				<input type="text">
+				<input id="staff-name" type="text">
 				<p>Password:</p>
-				<input type="password"> <br>
+				<input id="staff-password" type="password"> <br>
 				<input class="submit" type="submit" value="Login">
 			</form>
 		</div>
 		<div id="admin-wrapper">
-			<form id="admin-form">
+			<form id="admin-form" action="admin.html" onsubmit="return adminLogin()">
 				<h2>Admin Login</h2>
 				<p>Username:</p>
-				<input type="text">
+				<input id="admin-name" type="text">
 				<p>Password:</p>
-				<input type="password"> <br>
+				<input id="admin-password" type="password"> <br>
 				<input class="submit" type="submit" value="Login">
 			</form>
 		</div>
