@@ -1,0 +1,69 @@
+body {
+	margin: 0px;
+	background-color: #1f1f21;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#title {
+	margin: 0px;
+	padding: 10px;
+	background-color: #71bedd;
+}
+
+#prompt {
+	text-align: center;
+	margin-top: 15vh;
+	color: #fdb318;
+}
+
+#staff-wrapper {
+	float: left;
+	width: 49vw;
+}
+
+#admin-wrapper {
+	float: right;
+	width: 49vw;
+}
+
+form {
+	margin-top: 5vh;
+	padding: 40px;
+	border-radius: 5px;
+	background-color: #71bedd;
+}
+
+#staff-form {
+	margin-right: 3vw;
+	float: right;
+}
+
+#admin-form {
+	margin-left: 3vw;
+	float: left;
+}
+
+h2 {
+	margin: 0px;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+p {
+	margin-top: 15px;
+	margin-bottom: 2px;
+	font-weight: bold;
+}
+
+input {
+	font-size: 16pt;
+}
+
+.submit {
+	margin-top: 15px;
+	padding: 10px;
+	width: 100%;
+	font-weight: bold;
+	font-size: 16pt;
+	background-color: #fdb318;
+}

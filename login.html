@@ -7,23 +7,27 @@
 		<script src="login.js"></script>
 	</head>
 	<body>
-		<h2>AdminStaffPage - Login</h2>
-		<h1>Please Login:</h1>
-		<form>
-			<h2>Staff Login</h2>
-			<p>Username:</p>
-			<input type="text">
-			<p>Password:</p>
-			<input type="password">
-			<input type="submit" value="Login">
-		</form>
-		<form>
-			<h2>Admin Login</h2>
-			<p>Username:</p>
-			<input type="text">
-			<p>Password:</p>
-			<input type="password">
-			<input type="submit" value="Login">
-		</form>
+		<h1 id="title">AdminStaffPage - Login</h1>
+		<h1 id="prompt">Please Login:</h1>
+		<div id="staff-wrapper">
+			<form id="staff-form">
+				<h2>Staff Login</h2>
+				<p>Username:</p>
+				<input type="text">
+				<p>Password:</p>
+				<input type="password"> <br>
+				<input class="submit" type="submit" value="Login">
+			</form>
+		</div>
+		<div id="admin-wrapper">
+			<form id="admin-form">
+				<h2>Admin Login</h2>
+				<p>Username:</p>
+				<input type="text">
+				<p>Password:</p>
+				<input type="password"> <br>
+				<input class="submit" type="submit" value="Login">
+			</form>
+		</div>
 	</body>
 </html>
