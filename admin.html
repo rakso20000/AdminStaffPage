@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Admin Panel</title>
+		<link rel="stylesheet" href="admin.css">
+		<script src="admin.js"></script>
+	</head>
+	<body>
+		<h1 id="title">AdminStaffPage - Admin Panel</h1>
+		<div id="main">
+			<button id="students-button" class="tab-button" onclick="showStudents()">Students</button>
+			<button id="staff-button" class="tab-button" onclick="showStaff()">Staff</button>
+			<div id="students-content" class="content">
+				<table>
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Name</th>
+							<th>Department</th>
+							<th>E-Mail</th>
+						</tr>
+					</thead>
+					<tbody id="student-entries">
+						<tr class="student-entry">
+							<td class="student-id">17</td>
+							<td class="student-name">Sara</td>
+							<td class="student-department">Multimedia</td>
+							<td class="student-email">sara@example.com</td>
+						</tr>
+						<tr class="student-entry">
+							<td class="student-id">24</td>
+							<td class="student-name">Peter</td>
+							<td class="student-department">Mobile Applications</td>
+							<td class="student-email">peter@example.com</td>
+						</tr>
+					</tbody>
+				</table>
+				<template id="student-template">
+					<tr class="student-entry">
+						<td class="student-id"></td>
+						<td class="student-name"></td>
+						<td class="student-department"></td>
+						<td class="student-email"></td>
+					</tr>
+				</template>
+				<button class="show-modify-button" onclick="showAddStudent()">Add Student</button>
+				<button class="show-modify-button" onclick="showUpdateStudent()">Update Student</button>
+				<button class="show-modify-button" onclick="showDeleteStudent()">Delete Student</button>
+				<div id="add-student-dialog" class="modify-dialog">
+					<h3>Add Student:</h3>
+					ID: <input id="add-student-id" type="text">
+					Name: <input id="add-student-name" type="text">
+					Department: <select id="add-student-department">
+						<option value="Data Science">Data Science</option>
+						<option value="Multimedia">Multimedia</option>
+						<option value="Mobile Applications">Mobile Applications</option>
+						<option value="Medical Computer Science">Medical Computer Science</option>
+					</select>
+					E-Mail: <input id="add-student-email" type="text">
+					<button class="modify-button" onclick="addStudent()">Add Student</button>
+				</div>
+				<div id="update-student-dialog" class="modify-dialog">
+					<h3>Update Student:</h3>
+					ID: <input id="update-student-id" type="text" oninput="hideStudentUpdate()">
+					<button class="modify-button" onclick="showStudentUpdate()">Show Student</button> <br>
+					<div id="update-student-dialog-inner">
+						Name: <input id="update-student-name" type="text">
+						Department: <select id="update-student-department">
+							<option value="Data Science">Data Science</option>
+							<option value="Multimedia">Multimedia</option>
+							<option value="Mobile Applications">Mobile Applications</option>
+							<option value="Medical Computer Science">Medical Computer Science</option>
+						</select>
+						E-Mail: <input id="update-student-email" type="text">
+						<button class="modify-button" onclick="updateStudent()">Update Student</button>
+					</div>
+				</div>
+				<div id="delete-student-dialog" class="modify-dialog">
+					<h3>Delete Student:</h3>
+					ID: <input id="delete-student-id" type="text">
+					<button class="modify-button" onclick="deleteStudent()">Delete Student</button>
+				</div>
+			</div>
+			<div id="staff-content" class="content">
+				<table>
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Name</th>
+							<th>E-Mail</th>
+						</tr>
+					</thead>
+					<tbody id="staff-entries">
+						<tr class="staff-entry">
+							<td class="staff-id">15</td>
+							<td class="staff-name">Smith</td>
+							<td class="staff-email">smith@example.com</td>
+						</tr>
+						<tr class="staff-entry">
+							<td class="staff-id">16</td>
+							<td class="staff-name">Johnson</td>
+							<td class="staff-email">johnson@example.com</td>
+						</tr>
+					</tbody>
+				</table>
+				<template id="staff-template">
+					<tr class="staff-entry">
+						<td class="staff-id"></td>
+						<td class="staff-name"></td>
+						<td class="staff-email"></td>
+					</tr>
+				</template>
+				<button class="show-modify-button" onclick="showAddStaff()">Add Staff</button>
+				<button class="show-modify-button" onclick="showUpdateStaff()">Update Staff</button>
+				<button class="show-modify-button" onclick="showDeleteStaff()">Delete Staff</button>
+				<div id="add-staff-dialog" class="modify-dialog">
+					<h3>Add Staff:</h3>
+					ID: <input id="add-staff-id" type="text">
+					Name: <input id="add-staff-name" type="text">
+					E-Mail: <input id="add-staff-email" type="text">
+					<button class="modify-button" onclick="addStaff()">Add Staff</button>
+				</div>
+				<div id="update-staff-dialog" class="modify-dialog">
+					<h3>Update Staff:</h3>
+					ID: <input id="update-staff-id" type="text" oninput="hideStaffUpdate()">
+					<button class="modify-button" onclick="showStaffUpdate()">Show Staff</button> <br>
+					<div id="update-staff-dialog-inner">
+						Name: <input id="update-staff-name" type="text">
+						E-Mail: <input id="update-staff-email" type="text">
+						<button class="modify-button" onclick="updateStaff()">Update Staff</button>
+					</div>
+				</div>
+				<div id="delete-staff-dialog" class="modify-dialog">
+					<h3>Delete Staff:</h3>
+					ID: <input id="delete-staff-id" type="text">
+					<button class="modify-button" onclick="deleteStaff()">Delete Staff</button>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

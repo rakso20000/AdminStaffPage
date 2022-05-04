@@ -1,0 +1,87 @@
+body {
+	margin: 0px;
+	background-color: #1f1f21;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#title {
+	margin: 0px;
+	padding: 10px;
+	background-color: #71bedd;
+}
+
+#main {
+	float: center;
+	margin-top: 20px;
+	margin-left: 5vw;
+	padding: 10px;
+	border-radius: 5px;
+	width: 90vw;
+	background-color: #71bedd;
+}
+
+.tab-button {
+	margin-bottom: 10px;
+	width: 50%;
+	background-color: #fdb318;
+	font-size: 30pt;
+	font-weight: bold;
+}
+
+#staff-button {
+	float: right;
+}
+
+.content {
+	width: 100%;
+}
+
+#students-content {
+	display: block;
+}
+
+#staff-content {
+	display: none;
+}
+
+table {
+	width: 100%;
+}
+
+th {
+	padding: 3px;
+	background-color: #fdb318;
+	border: 2px solid black;
+}
+
+#students-content th {
+	width: 25%;
+}
+
+#staff-content th {
+	width: 33%;
+}
+
+td {
+	padding: 3px;
+	border: 1px solid black;
+}
+
+.show-modify-button {
+	margin-top: 10px;
+	background-color: #fdb318;
+	font-size: 16pt;
+}
+
+.modify-dialog {
+	display: none;
+}
+
+.modify-button {
+	background-color: #fdb318;
+}
+
+#update-student-dialog-inner, #update-staff-dialog-inner {
+	margin-top: 10px;
+	display: none;
+};
