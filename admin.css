@@ -11,7 +11,6 @@ body {
 }
 
 #main {
-	float: center;
 	margin-top: 20px;
 	margin-left: 5vw;
 	padding: 10px;
@@ -24,7 +23,7 @@ body {
 	margin-bottom: 10px;
 	width: 50%;
 	background-color: #fdb318;
-	font-size: 30pt;
+	font-size: 26pt;
 	font-weight: bold;
 }
 
