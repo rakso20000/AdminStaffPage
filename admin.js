@@ -18,6 +18,26 @@ const students = new Set([
 		department: 'Mobile Applications',
 		email: 'peter@example.com',
 		joiningDate: '2015-02-20'
+	},
+	{
+		id: '2',
+		firstName: 'Hans',
+		lastName: 'Peter',
+		dob: '2003-03-30',
+		gender: 'Male',
+		department: 'Data Science',
+		email: 'hans@example.com',
+		joiningDate: '2015-03-30'
+	},
+	{
+		id: '3',
+		firstName: 'Sam',
+		lastName: 'Schmidt',
+		dob: '2000-06-01',
+		gender: 'Other',
+		department: 'Multimedia',
+		email: 'sam@example.com',
+		joiningDate: '2015-06-01'
 	}
 ]);
 
@@ -51,17 +71,17 @@ const init = () => {
 	const template = document.querySelector('#student-template').content
 	const entries = document.querySelector('#student-entries');
 	
-	let entry = template.cloneNode(true);
-	let student = findStudent('0');
-	student.html = entry.children[0];
-	writeStudent(student);
-	entries.appendChild(entry);
+	for (let i = 0; i < 4; ++i) {
+		
+		const entry = template.cloneNode(true);
+		const student = findStudent(`${i}`);
+		student.html = entry.children[0];
+		writeStudent(student);
+		entries.appendChild(entry);
+		
+	}
 	
-	entry = template.cloneNode(true);
-	student = findStudent('1');
-	student.html = entry.children[0];
-	writeStudent(student);
-	entries.appendChild(entry);
+	updateFilter();
 	
 };
 
@@ -458,5 +478,32 @@ const validateEmail = email => {
 	
 	alert(`${email} is not a valid email address`);
 	return false;
+	
+};
+
+const updateFilter = () => {
+	
+	const department = document.querySelector('#department-filter').value;
+	const semester = document.querySelector('#semester-filter').value;
+	
+	students.forEach(student => student.html.style.display = 'none');
+	
+	let visibleStudents = Array.from(students);
+	
+	if (department !== 'All')
+		visibleStudents = visibleStudents.filter(student => student.department === department);
+	
+	if (semester !== 'All')
+		visibleStudents = visibleStudents.filter(student => {
+			
+			const month = new Date(student.joiningDate).getMonth();
+			
+			const isSummerSemester = month >= 4 && month <= 9;
+			
+			return isSummerSemester === (semester === 'Summer');
+			
+		});
+	
+	visibleStudents.forEach(student => student.html.style.display = '');
 	
 };

@@ -12,6 +12,22 @@
 			<button id="students-button" class="tab-button" onclick="showStudents()">Students</button>
 			<button id="staff-button" class="tab-button" onclick="showStaff()">Staff</button>
 			<div id="students-content" class="content">
+				<div id="filter">
+					Department:
+					<select id="department-filter" onchange="updateFilter()">
+						<option value="All">All</option>
+						<option value="Data Science">Data Science</option>
+						<option value="Multimedia">Multimedia</option>
+						<option value="Mobile Applications">Mobile Applications</option>
+						<option value="Medical Computer Science">Medical Computer Science</option>
+					</select>
+					Semester:
+					<select id="semester-filter" onchange="updateFilter()">
+						<option value="All">All</option>
+						<option value="Winter">Winter</option>
+						<option value="Summer">Summer</option>
+					</select>
+				</div>
 				<table>
 					<thead>
 						<tr>

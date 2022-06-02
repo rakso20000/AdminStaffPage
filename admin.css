@@ -43,7 +43,20 @@ body {
 	display: none;
 }
 
+#filter {
+	font-size: 16pt;
+}
+
+#filter select {
+	appearance: none;
+	background-color: #fdb318;
+	font-size: 16pt;
+	font-weight: bold;
+	border: 2px solid black;
+}
+
 table {
+	margin-top: 10px;
 	width: 100%;
 }
 
