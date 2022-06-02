@@ -1,3 +1,70 @@
+const students = new Set([
+	{
+		id: '0',
+		firstName: 'Sara',
+		lastName: 'Smith',
+		dob: '2001-01-10',
+		gender: 'Female',
+		department: 'Multimedia',
+		email: 'sara@example.com',
+		joiningDate: '2015-01-10'
+	},
+	{
+		id: '1',
+		firstName: 'Peter',
+		lastName: 'Long',
+		dob: '2002-02-20',
+		gender: 'Male',
+		department: 'Mobile Applications',
+		email: 'peter@example.com',
+		joiningDate: '2015-02-20'
+	}
+]);
+
+const init = () => {
+		
+	const yesterday = new Date(Date.now() - 854e5).toISOString().split('T')[0];
+	
+	dobInputs = document.querySelectorAll('.dob');
+	
+	for (let i = 0; i < dobInputs.length; ++i) {
+		
+		const dobInput = dobInputs[i];
+		
+		dobInput.setAttribute('max', yesterday);
+		
+	}
+	
+	const joiningYear = '2015';
+	
+	joiningDateInputs = document.querySelectorAll('.joining-date');
+	
+	for (let i = 0; i < joiningDateInputs.length; ++i) {
+		
+		const joiningDateInput = joiningDateInputs[i];
+		
+		joiningDateInput.setAttribute('min', `${joiningYear}-01-01`);
+		joiningDateInput.setAttribute('max', `${joiningYear}-12-31`);
+		
+	}
+	
+	const template = document.querySelector('#student-template').content
+	const entries = document.querySelector('#student-entries');
+	
+	let entry = template.cloneNode(true);
+	let student = findStudent('0');
+	student.html = entry.children[0];
+	writeStudent(student);
+	entries.appendChild(entry);
+	
+	entry = template.cloneNode(true);
+	student = findStudent('1');
+	student.html = entry.children[0];
+	writeStudent(student);
+	entries.appendChild(entry);
+	
+};
+
 const showStudents = () => {
 	
 	document.querySelector('#staff-content').style.display = 'none';
@@ -65,48 +132,62 @@ const showDeleteStaff = () => {
 	
 }
 
+const readStudent = dialog => {
+	
+	return {
+		id: dialog.querySelector('.id').value,
+		firstName: dialog.querySelector('.first-name').value,
+		lastName: dialog.querySelector('.last-name').value,
+		dob: dialog.querySelector('.dob').value,
+		gender: dialog.querySelector('.gender:checked')?.value,
+		department: dialog.querySelector('.department').value,
+		email: dialog.querySelector('.email').value,
+		joiningDate: dialog.querySelector('.joining-date').value
+	};
+	
+};
+
 const findStudent = id => {
 	
-	const students = document.querySelectorAll('.student-entry');
+	return Array.from(students).find(student => student.id === id);
 	
-	for (let i = 0; i < students.length; ++i) {
-		
-		const student = students[i];
-		
-		if (student.querySelector('.student-id').textContent === id)
-			return student;
-		
-	}
+};
+
+const writeStudent = (student) => {
 	
-	return undefined;
+	const container = student.html;
+	
+	container.querySelector('.student-id').textContent = student.id;
+	container.querySelector('.student-first-name').textContent = student.firstName;
+	container.querySelector('.student-last-name').textContent = student.lastName;
+	container.querySelector('.student-dob').textContent = student.dob;
+	container.querySelector('.student-gender').textContent = student.gender;
+	container.querySelector('.student-department').textContent = student.department;
+	container.querySelector('.student-email').textContent = student.email;
+	container.querySelector('.student-joining-date').textContent = student.joiningDate;
 	
 };
 
 const addStudent = () => {
 	
-	const id = document.querySelector('#add-student-id').value;
-	const name = document.querySelector('#add-student-name').value;
-	const department = document.querySelector('#add-student-department').value;
-	const email = document.querySelector('#add-student-email').value;
+	const student = readStudent(document.querySelector('#add-student-dialog'));
 	
-	if (!validateID(id) || !validateName(name) || !validateEmail(email))
+	if (!validateStudent(student))
 		return;
 	
-	if (findStudent(id) !== undefined) {
+	if (findStudent(student.id) !== undefined) {
 		
-		alert(`Student with id ${id} already exists`);
+		alert(`Student with id ${student.id} already exists`);
 		return;
 		
 	}
 	
-	const template = document.querySelector('#student-template');
-	template.content.querySelector('.student-id').textContent = id;
-	template.content.querySelector('.student-name').textContent = name;
-	template.content.querySelector('.student-department').textContent = department;
-	template.content.querySelector('.student-email').textContent = email;
-	
-	const entry = template.content.cloneNode(true);
+	const entry = document.querySelector('#student-template').content.cloneNode(true);
+	student.html = entry.children[0];
+	writeStudent(student);
 	document.querySelector('#student-entries').appendChild(entry);
+	
+	students.add(student);
 	
 	showAddStudent();
 	
@@ -114,7 +195,7 @@ const addStudent = () => {
 
 const showStudentUpdate = () => {
 	
-	const id = document.querySelector('#update-student-id').value;
+	const id = document.querySelector('#update-student-dialog .id').value;
 	
 	if (!validateID(id))
 		return;
@@ -128,13 +209,15 @@ const showStudentUpdate = () => {
 		
 	}
 	
-	const name = student.querySelector('.student-name').textContent;
-	const department = student.querySelector('.student-department').textContent;
-	const email = student.querySelector('.student-email').textContent;
-	
-	document.querySelector('#update-student-name').value = name;
-	document.querySelector('#update-student-department').value = department;
-	document.querySelector('#update-student-email').value = email;
+	const dialog = document.querySelector('#update-student-dialog-inner');
+	dialog.querySelector('.first-name').value = student.firstName;
+	dialog.querySelector('.last-name').value = student.lastName;
+	dialog.querySelector('.dob').value = student.dob;
+	dialog.querySelector(`#update-student-${student.gender.toLowerCase()}`).checked = true;
+	dialog.querySelector('#update-student-other').checked = student.gender === 'Other';
+	dialog.querySelector('.department').value = student.department;
+	dialog.querySelector('.email').value = student.email;
+	dialog.querySelector('.joining-date').value = student.joiningDate;
 	
 	document.querySelector('#update-student-dialog-inner').style.display = 'block';
 	
@@ -148,26 +231,25 @@ const hideStudentUpdate = () => {
 
 const updateStudent = () => {
 	
-	const id = document.querySelector('#update-student-id').value;
-	const name = document.querySelector('#update-student-name').value;
-	const department = document.querySelector('#update-student-department').value;
-	const email = document.querySelector('#update-student-email').value;
+	const student = readStudent(document.querySelector('#update-student-dialog'));
 	
-	if (!validateID(id) || !validateName(name) || !validateEmail(email))
+	if (!validateStudent(student))
 		return;
 	
-	const student = findStudent(id);
+	const prevStudent = findStudent(student.id);
 	
-	if (student === undefined) {
+	if (prevStudent === undefined) {
 		
-		alert(`Student with id ${id} not found`)
+		alert(`Student with id ${student.id} not found`)
 		return;
 		
 	}
 	
-	student.querySelector('.student-name').textContent = name;
-	student.querySelector('.student-department').textContent = department;
-	student.querySelector('.student-email').textContent = email;
+	student.html = prevStudent.html;
+	students.delete(prevStudent);
+	students.add(student);
+	
+	writeStudent(student);
 	
 	hideStudentUpdate();
 	
@@ -191,7 +273,8 @@ const deleteStudent = () => {
 		
 	}
 	
-	student.remove();
+	student.html.remove();
+	students.delete(student);
 	
 	showDeleteStudent();
 	
@@ -320,6 +403,31 @@ const deleteStaff = () => {
 	staff.remove();
 	
 	showDeleteStaff();
+	
+};
+
+const validateStudent = student => {
+	
+	const age = Math.floor((new Date() - new Date(student.dob).getTime()) / 3.15576e+10);
+	
+	if (age < 17 || age > 60) {
+		
+		alert('Invalid date of birth');
+		return false;
+		
+	}
+	
+	if (student.gender === undefined) {
+		
+		alert('Please select a gender');
+		return false;
+		
+	}
+	
+	return validateID(student.id)
+		&& validateName(student.firstName)
+		&& validateName(student.lastName)
+		&& validateEmail(student.email);
 	
 };
 

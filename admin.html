@@ -6,7 +6,7 @@
 		<link rel="stylesheet" href="admin.css">
 		<script src="admin.js"></script>
 	</head>
-	<body>
+	<body onload="init()">
 		<h1 id="title">AdminStaffPage - Admin Panel</h1>
 		<div id="main">
 			<button id="students-button" class="tab-button" onclick="showStudents()">Students</button>
@@ -16,32 +16,28 @@
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>Name</th>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Date of Birth</th>
+							<th>Gender</th>
 							<th>Department</th>
 							<th>E-Mail</th>
+							<th>Joining Date</th>
 						</tr>
 					</thead>
 					<tbody id="student-entries">
-						<tr class="student-entry">
-							<td class="student-id">17</td>
-							<td class="student-name">Sara</td>
-							<td class="student-department">Multimedia</td>
-							<td class="student-email">sara@example.com</td>
-						</tr>
-						<tr class="student-entry">
-							<td class="student-id">24</td>
-							<td class="student-name">Peter</td>
-							<td class="student-department">Mobile Applications</td>
-							<td class="student-email">peter@example.com</td>
-						</tr>
 					</tbody>
 				</table>
 				<template id="student-template">
 					<tr class="student-entry">
 						<td class="student-id"></td>
-						<td class="student-name"></td>
+						<td class="student-first-name"></td>
+						<td class="student-last-name"></td>
+						<td class="student-dob"></td>
+						<td class="student-gender"></td>
 						<td class="student-department"></td>
 						<td class="student-email"></td>
+						<td class="student-joining-date"></td>
 					</tr>
 				</template>
 				<button class="show-modify-button" onclick="showAddStudent()">Add Student</button>
@@ -49,30 +45,52 @@
 				<button class="show-modify-button" onclick="showDeleteStudent()">Delete Student</button>
 				<div id="add-student-dialog" class="modify-dialog">
 					<h3>Add Student:</h3>
-					ID: <input id="add-student-id" type="text">
-					Name: <input id="add-student-name" type="text">
-					Department: <select id="add-student-department">
+					ID: <input class="id" type="text">
+					First Name: <input class="first-name" type="text">
+					Last Name: <input class="last-name" type="text">
+					Date of Birth: <input class="dob" type="date">
+					Gender:
+					<input id="add-student-male" class="gender" name="gender" type="radio" value="Male" checked>
+					<label for="add-student-male">Male</label>
+					<input id="add-student-female" class="gender" name="gender" type="radio" value="Female">
+					<label for="add-student-female">Female</label>
+					<input id="add-student-other" class="gender" name="gender" type="radio" value="Other">
+					<label for="add-student-other">Other</label>
+					<br>
+					Department: <select class="department">
 						<option value="Data Science">Data Science</option>
 						<option value="Multimedia">Multimedia</option>
 						<option value="Mobile Applications">Mobile Applications</option>
 						<option value="Medical Computer Science">Medical Computer Science</option>
 					</select>
-					E-Mail: <input id="add-student-email" type="text">
+					E-Mail: <input class="email" type="text">
+					Joining Date: <input class="joining-date" type="date">
 					<button class="modify-button" onclick="addStudent()">Add Student</button>
 				</div>
 				<div id="update-student-dialog" class="modify-dialog">
 					<h3>Update Student:</h3>
-					ID: <input id="update-student-id" type="text" oninput="hideStudentUpdate()">
+					ID: <input class="id" type="text" oninput="hideStudentUpdate()">
 					<button class="modify-button" onclick="showStudentUpdate()">Show Student</button> <br>
 					<div id="update-student-dialog-inner">
-						Name: <input id="update-student-name" type="text">
-						Department: <select id="update-student-department">
+						First Name: <input class="first-name" type="text">
+						Last Name: <input class="last-name" type="text">
+						Date of Birth: <input class="dob" type="date">
+						Gender:
+						<input id="update-student-male" class="gender" name="gender" type="radio" value="Male" checked>
+						<label for="update-student-male">Male</label>
+						<input id="update-student-female" class="gender" name="gender" type="radio" value="Female">
+						<label for="update-student-female">Female</label>
+						<input id="update-student-other" class="gender" name="gender" type="radio" value="Other">
+						<label for="update-student-other">Other</label>
+						<br>
+						Department: <select class="department">
 							<option value="Data Science">Data Science</option>
 							<option value="Multimedia">Multimedia</option>
 							<option value="Mobile Applications">Mobile Applications</option>
 							<option value="Medical Computer Science">Medical Computer Science</option>
 						</select>
-						E-Mail: <input id="update-student-email" type="text">
+						E-Mail: <input class="email" type="text">
+						Joining Date: <input class="joining-date" type="date">
 						<button class="modify-button" onclick="updateStudent()">Update Student</button>
 					</div>
 				</div>
