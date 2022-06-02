@@ -89,6 +89,9 @@ const addStudent = () => {
 	const department = document.querySelector('#add-student-department').value;
 	const email = document.querySelector('#add-student-email').value;
 	
+	if (!validateID(id) || !validateName(name) || !validateEmail(email))
+		return;
+	
 	if (findStudent(id) !== undefined) {
 		
 		alert(`Student with id ${id} already exists`);
@@ -105,11 +108,16 @@ const addStudent = () => {
 	const entry = template.content.cloneNode(true);
 	document.querySelector('#student-entries').appendChild(entry);
 	
+	showAddStudent();
+	
 };
 
 const showStudentUpdate = () => {
 	
 	const id = document.querySelector('#update-student-id').value;
+	
+	if (!validateID(id))
+		return;
 	
 	const student = findStudent(id);
 	
@@ -145,6 +153,9 @@ const updateStudent = () => {
 	const department = document.querySelector('#update-student-department').value;
 	const email = document.querySelector('#update-student-email').value;
 	
+	if (!validateID(id) || !validateName(name) || !validateEmail(email))
+		return;
+	
 	const student = findStudent(id);
 	
 	if (student === undefined) {
@@ -160,11 +171,16 @@ const updateStudent = () => {
 	
 	hideStudentUpdate();
 	
+	showUpdateStudent();
+	
 };
 
 const deleteStudent = () => {
 	
 	const id = document.querySelector('#delete-student-id').value;
+	
+	if (!validateID(id))
+		return;
 	
 	const student = findStudent(id);
 	
@@ -176,6 +192,8 @@ const deleteStudent = () => {
 	}
 	
 	student.remove();
+	
+	showDeleteStudent();
 	
 };
 
@@ -202,6 +220,9 @@ const addStaff = () => {
 	const name = document.querySelector('#add-staff-name').value;
 	const email = document.querySelector('#add-staff-email').value;
 	
+	if (!validateID(id) || !validateName(name) || !validateEmail(email))
+		return;
+	
 	if (findStaff(id) !== undefined) {
 		
 		alert(`Staff with id ${id} already exists`);
@@ -217,11 +238,16 @@ const addStaff = () => {
 	const entry = template.content.cloneNode(true);
 	document.querySelector('#staff-entries').appendChild(entry);
 	
+	showAddStaff();
+	
 };
 
 const showStaffUpdate = () => {
 	
 	const id = document.querySelector('#update-staff-id').value;
+	
+	if (!validateID(id))
+		return;
 	
 	const staff = findStaff(id);
 	
@@ -254,6 +280,9 @@ const updateStaff = () => {
 	const name = document.querySelector('#update-staff-name').value;
 	const email = document.querySelector('#update-staff-email').value;
 	
+	if (!validateID(id) || !validateName(name) || !validateEmail(email))
+		return;
+	
 	const staff = findStaff(id);
 	
 	if (staff === undefined) {
@@ -268,11 +297,16 @@ const updateStaff = () => {
 	
 	hideStaffUpdate();
 	
+	showUpdateStaff();
+	
 };
 
 const deleteStaff = () => {
 	
 	const id = document.querySelector('#delete-staff-id').value;
+	
+	if (!validateID(id))
+		return;
 	
 	const staff = findStaff(id);
 	
@@ -284,5 +318,37 @@ const deleteStaff = () => {
 	}
 	
 	staff.remove();
+	
+	showDeleteStaff();
+	
+};
+
+const validateID = id => {
+	
+	if (/^\d+$/.test(id))
+		return true;
+	
+	alert('Id must be a number');
+	return false;
+	
+};
+
+const validateName = name => {
+	
+	if (name !== '')
+		return true;
+	
+	alert('Name must not be empty');
+	return false;
+	
+};
+
+const validateEmail = email => {
+	
+	if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
+		return true;
+	
+	alert(`${email} is not a valid email address`);
+	return false;
 	
 };
